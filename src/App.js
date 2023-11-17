@@ -1,24 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
-
+import './App.scss';
+import { BrowserRouter as Router,Switch,Route } from 'react-router-dom'
+import Layout from './hocs/Layout';
+import { Provider } from 'react-redux'
+import store from './store';
+import Home from './containers/Home';
+import Login from './containers/Auth/Login';
+import Logout from './containers/Auth/Logout';
+import Register from './containers/Auth/Register';
+import Profile from './containers/Quiz/Profile';
+import Tests from './containers/Quiz/Tests';
+import TestDetail from './containers/Quiz/TestDetail';
+import ResultDetail from './containers/Quiz/ResultDetail';
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <Router>
+        <Layout>
+         
+            <Route exact path="/" component={Home}/>
+            <Route exact path="/login" component={Login}/>
+            <Route exact path="/logout" component={Logout}/>
+            <Route exact path="/register" component={Register}/>
+            <Route exact path="/profile" component={Profile}/>
+            <Route exact path="/tests" component={Tests}/>
+            <Route exact path="/test/:slug" component={TestDetail}/>
+            <Route exact path="/result/:id" component={ResultDetail}/>
+         
+        </Layout>
+      </Router>
+    </Provider>
   );
 }
 
